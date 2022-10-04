@@ -15,7 +15,10 @@ GEM
     webrick (1.7.0)
 
 PLATFORMS
+  arm64-darwin
   arm64-darwin-21
+  x86_64-darwin
+  x86_64-linux
 
 DEPENDENCIES
   foreman (~> 0.87.2)
