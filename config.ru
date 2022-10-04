@@ -1,20 +1,18 @@
 # inspiration from
 # https://github.com/mperham/sidekiq/wiki/Monitoring#standalone-with-basic-auth
 
-require 'sidekiq'
-require 'sidekiq/web'
-require './config/sidekiq'
+require "./boot.rb"
 
 use Rack::Session::Cookie, secret: ENV.fetch('RACK_SESSION_SECRET') , same_site: true, max_age: 86400
 
 map '/' do
-  if ENV['USERNAME'] && ENV['PASSWORD']
-    use Rack::Auth::Basic, "Protected Area" do |username, password|
+  if ENV.fetch('SIDEKIQ_USER') && ENV.fetch('SIDEKIQ_PASS')
+    use Rack::Auth::Basic, "Protected Area1" do |username, password|
       # Protect against timing attacks: (https://codahale.com/a-lesson-in-timing-attacks/)
       # - Use & (do not use &&) so that it doesn't short circuit.
       # - Use digests to stop length information leaking
-      Rack::Utils.secure_compare(::Digest::SHA256.hexdigest(username), ::Digest::SHA256.hexdigest(ENV["USERNAME"])) &
-        Rack::Utils.secure_compare(::Digest::SHA256.hexdigest(password), ::Digest::SHA256.hexdigest(ENV["PASSWORD"]))
+      Rack::Utils.secure_compare(::Digest::SHA256.hexdigest(username), ::Digest::SHA256.hexdigest(ENV.fetch('SIDEKIQ_USER'))) &
+        Rack::Utils.secure_compare(::Digest::SHA256.hexdigest(password), ::Digest::SHA256.hexdigest(ENV.fetch('SIDEKIQ_PASS')))
     end
   end
 

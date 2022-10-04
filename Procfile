@@ -1,2 +1,2 @@
-sidekiq: bin/sidekiq -r ./config/sidekiq.rb
-web: bin/rackup
+sidekiq: bin/sidekiq -v -r ./boot.rb
+web: bin/rackup -o 0.0.0.0

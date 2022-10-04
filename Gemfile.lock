@@ -1,8 +1,15 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    concurrent-ruby (1.1.10)
     connection_pool (2.3.0)
+    et-orbi (1.2.7)
+      tzinfo
     foreman (0.87.2)
+    fugit (1.7.1)
+      et-orbi (~> 1, >= 1.2.7)
+      raabro (~> 1.4)
+    raabro (1.4.0)
     rack (2.2.4)
     rackup (0.1.0)
       rack
@@ -12,6 +19,11 @@ GEM
       connection_pool (>= 2.2.5)
       rack (~> 2.0)
       redis (>= 4.5.0, < 5)
+    sidekiq-cron (1.8.0)
+      fugit (~> 1)
+      sidekiq (>= 4.2.1)
+    tzinfo (2.0.5)
+      concurrent-ruby (~> 1.0)
     webrick (1.7.0)
 
 PLATFORMS
@@ -24,6 +36,7 @@ DEPENDENCIES
   foreman (~> 0.87.2)
   rackup (~> 0.1.0)
   sidekiq
+  sidekiq-cron (~> 1.8)
 
 BUNDLED WITH
    2.3.13
