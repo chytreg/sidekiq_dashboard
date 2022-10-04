@@ -3,6 +3,7 @@ GEM
   specs:
     concurrent-ruby (1.1.10)
     connection_pool (2.3.0)
+    curb (1.0.1)
     et-orbi (1.2.7)
       tzinfo
     foreman (0.87.2)
@@ -33,6 +34,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  curb (~> 1.0)
   foreman (~> 0.87.2)
   rackup (~> 0.1.0)
   sidekiq
