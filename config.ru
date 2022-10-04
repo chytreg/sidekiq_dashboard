@@ -2,15 +2,10 @@
 # https://github.com/mperham/sidekiq/wiki/Monitoring#standalone-with-basic-auth
 
 require 'sidekiq'
-
-Sidekiq.configure_client do |config|
-  config.redis = {
-    url: ENV.fetch('REDIS_URL','redis://localhost:6379'),
-    size: 1
-  }
-end
-use Rack::Session::Cookie, secret: "30a06c8eeed7c03930ca7815c469737c94c53148cbad2ca921c2fcfcfd9e48fb", same_site: true, max_age: 86400
 require 'sidekiq/web'
+require './config/sidekiq'
+
+use Rack::Session::Cookie, secret: ENV.fetch('RACK_SESSION_SECRET') , same_site: true, max_age: 86400
 
 map '/' do
   if ENV['USERNAME'] && ENV['PASSWORD']
